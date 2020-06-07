@@ -17,11 +17,13 @@ auth_params = {'client_id': client_id, 'client_secret': client_secret, 'grant_ty
 
 token = "TOKEN" # = stream['access_token']
 
+# Checking if Token is Valid
 validate_headers = {'client-id': client_id, 'Authorization': 'OAuth ' + token }
 valid = requests.get(validate_url, headers=validate_headers).json()
 print(valid)
 
 if valid['expires_in'] < 3600:
+	# Getting an App access token, if Token is about to expire
 	stream = requests.post(auth_url, params=auth_params).json()
 	print (stream['access_token'])
 else:
