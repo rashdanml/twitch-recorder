@@ -1,3 +1,6 @@
 venv/
 __pycache__/
 config.ini
+
+README.md
+LICENSE
