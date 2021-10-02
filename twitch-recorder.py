@@ -58,12 +58,12 @@ class TwitchRecorder():
     # Check to see user status, start recording if online.
     def loopcheck(self):
         while True:
-            print("Validating OAuth_Token ...", end="")
+            print(datetime.datetime.now().strftime("%Hh%Mm%Ss"), " ", "Validating OAuth_Token ...", end="")
             valid = conf.validate()
             print("Done!")
 
             if 'status' in valid and valid['status'] == 401 and valid['message'] == "invalid access token":
-                print("OAuth_Token Invalid, Refreshing Token ... ", end="")
+                print(datetime.datetime.now().strftime("%Hh%Mm%Ss"), " ", "OAuth_Token Invalid, Refreshing Token ... ", end="")
                 conf.refresh()
                 print("OAuth_Token Refreshed!")
 
