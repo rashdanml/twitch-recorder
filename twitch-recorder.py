@@ -9,6 +9,8 @@ import subprocess
 import datetime
 import getopt
 import random
+import urllib3
+import socket
 from config import conf
 
 
@@ -36,7 +38,7 @@ class TwitchRecorder():
 
                 try:
                     info = requests.get(url, headers=headers).json()
-                except (requests.exceptions.ConnectionError, json.decoder.JSONDecodeError):
+                except (requests.exceptions.ConnectionError, json.decoder.JSONDecodeError, urllib3.exceptions.MaxRetryError, urllib3.exceptions.NewConnectionError, socket.gaierror):
                     time.sleep(2**try_number + random.random()*0.01)
                     return getinfo(try_number=try_number+1)
                 else:
