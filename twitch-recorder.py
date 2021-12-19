@@ -19,9 +19,9 @@ class TwitchRecorder():
         # Global configuration
         self.refresh = 10.0
         self.ffmpeg_path = "ffmpeg"
-        self.root_path = "/home/rashy/vods"
+        self.root_path = "[replace with desired home directory]/vods"
 
-        self.username = "rashdanml"
+        self.username = "[replace with your username]"
         self.quality = "best"
 
     # Check user status. #0 - online, #1 - offline, #2 - not found, #3 - error
@@ -62,13 +62,13 @@ class TwitchRecorder():
         while True:
             print(datetime.datetime.now().strftime("%Hh%Mm%Ss"),
                   " ", "Validating OAuth_Token ...", end="")
-            valid = conf.validate(1)
+            valid = conf.validate()
             print("Done!")
 
             if 'status' in valid and valid['status'] == 401 and valid['message'] == "invalid access token":
                 print(datetime.datetime.now().strftime("%Hh%Mm%Ss"), " ",
                       "OAuth_Token Invalid, Refreshing Token ... ", end="")
-                conf.refresh(1)
+                conf.refresh()
                 print("OAuth_Token Refreshed!")
 
             status, info = self.check_user()
@@ -96,7 +96,7 @@ class TwitchRecorder():
                 recorded_filename = os.path.join(self.recorded_path, filename)
 
                 # start streamlink process
-                subprocess.call(["venv/bin/streamlink", "--twitch-disable-hosting", "--twitch-disable-ads",
+                subprocess.call(["streamlink", "--twitch-disable-hosting", "--twitch-disable-ads",
                                  "twitch.tv/" + self.username, self.quality, "-o", recorded_filename])
 
                 print("Recording stream is done. Fixing video file.")
