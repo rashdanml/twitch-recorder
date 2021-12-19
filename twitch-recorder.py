@@ -19,7 +19,7 @@ class TwitchRecorder():
         # Global configuration
         self.refresh = 10.0
         self.ffmpeg_path = "ffmpeg"
-        self.root_path = "vods"
+        self.root_path = "/home/rashy/vods"
 
         self.username = "rashdanml"
         self.quality = "best"
@@ -60,13 +60,15 @@ class TwitchRecorder():
     # Check to see user status, start recording if online.
     def loopcheck(self):
         while True:
-            print(datetime.datetime.now().strftime("%Hh%Mm%Ss"), " ", "Validating OAuth_Token ...", end="")
-            valid = conf.validate()
+            print(datetime.datetime.now().strftime("%Hh%Mm%Ss"),
+                  " ", "Validating OAuth_Token ...", end="")
+            valid = conf.validate(1)
             print("Done!")
 
             if 'status' in valid and valid['status'] == 401 and valid['message'] == "invalid access token":
-                print(datetime.datetime.now().strftime("%Hh%Mm%Ss"), " ", "OAuth_Token Invalid, Refreshing Token ... ", end="")
-                conf.refresh()
+                print(datetime.datetime.now().strftime("%Hh%Mm%Ss"), " ",
+                      "OAuth_Token Invalid, Refreshing Token ... ", end="")
+                conf.refresh(1)
                 print("OAuth_Token Refreshed!")
 
             status, info = self.check_user()
