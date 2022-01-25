@@ -29,7 +29,7 @@ class Config():
             i += 1
             try:
                 valid = requests.get(validate_url, headers=valid_headers).json()
-            except (requests.exceptions.ConnectionError, json.decoder.JSONDecodeError, urllib3.exceptions.MaxRetryError, urllib3.exceptions.NewConnectionError, socket.gaierror):
+            except (requests.exceptions.ConnectionError, json.decoder.JSONDecodeError, urllib3.exceptions.MaxRetryError, urllib3.exceptions.NewConnectionError, socket.gaierror, KeyError):
                 time.sleep(15)
                 continue
             else:
@@ -46,7 +46,7 @@ class Config():
             i += 1
             try:
                 key = requests.post(auth_url, params=auth_params).json()
-            except (requests.exceptions.ConnectionError, json.decoder.JSONDecodeError, urllib3.exceptions.MaxRetryError, urllib3.exceptions.NewConnectionError, socket.gaierror):
+            except (requests.exceptions.ConnectionError, json.decoder.JSONDecodeError, urllib3.exceptions.MaxRetryError, urllib3.exceptions.NewConnectionError, socket.gaierror, KeyError):
                 time.sleep(15)
                 continue
             else:
