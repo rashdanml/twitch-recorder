@@ -10,6 +10,8 @@ Python Script to automatically archive Twitch streams, checking periodically to 
 - Leave OAuthToken blank, it will automatically fetch a token on first run. 
 - Create virtual environment, install dependencies from requirements.txt
 
+- As of recently, in order to properly bypass Twitch Ads, the following method is required: [StreamLink Authentication](https://streamlink.github.io/latest/cli/plugins/twitch.html#authentication)
+
 ### Key dependencies
 - ffmpeg
 - streamlink
